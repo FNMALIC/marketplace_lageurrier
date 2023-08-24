@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        {% endblock %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
+	    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+	    <link rel="stylesheet" type="text/css" href="{{ asset('css/line-awesome.css') }}">
+	    <link rel="stylesheet" type="text/css" href="{{ asset('css/line-awesome-font-awesome.min.css') }}">
+	    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+	    <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
+	    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.mCustomScrollbar.min.css') }}">
+	    <link rel="stylesheet" type="text/css" href="{{ asset('lib/slick/slick.css') }}">
+	    <link rel="stylesheet" type="text/css" href="{{ asset('lib/slick/slick-theme.css') }}">
+	    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+	    <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        {% endblock %}
+    </head>
+    <body>
+    {# {% block header %} #}
+    {# <nav class="navbar navbar-dark bg-dark sticky-top"> #}
+        {# ... #}
+        {# <div class="navbar-nav"> #}
+            {# <a href="{{ path('app_cart') }}" class="btn btn-light"> #}
+                {# Cart #}
+            {# </a> #}
+        {# </div> #}
+    {# </nav> #}
+{# {% endblock %} #}
+        	<div class="wrapper">
+
+        {% block body %}{% endblock %}
+
+        </div>
+    </body>
+
+
+<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/popper.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('lib/slick/slick.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
+</html>

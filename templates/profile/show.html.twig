@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+    <h1>Profile</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ profile.id }}</td>
+            </tr>
+            <tr>
+                <th>FullName</th>
+                <td>{{ profile.fullName }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ profile.address }}</td>
+            </tr>
+            <tr>
+                <th>PhoneNumber</th>
+                <td>{{ profile.phoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>DateOfBirth</th>
+                <td>{{ profile.dateOfBirth ? profile.dateOfBirth|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ProfilePicture</th>
+                <td>{{ profile.profilePicture }}</td>
+            </tr>
+            <tr>
+                <th>Bio</th>
+                <td>{{ profile.bio }}</td>
+            </tr>
+            <tr>
+                <th>SocialMediaLinks</th>
+                <td>{{ profile.socialMediaLinks ? profile.socialMediaLinks|join(', ') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_profile_index') }}">back to list</a>
+
+    <a href="{{ path('app_profile_edit', {'id': profile.id}) }}">edit</a>
+
+    {{ include('profile/_delete_form.html.twig') }}
+{% endblock %}

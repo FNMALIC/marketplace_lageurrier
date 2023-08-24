@@ -1,0 +1,13 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+access_denied:
+        path: /access-denied
+        controller: App\Controller\AccessDeniedController::accessDenied
+
+dashboard:
+    path: /admin
+    controller: App\Controller\Admin\DashboardController::index

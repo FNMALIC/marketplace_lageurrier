@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+
+	<div class="wrapper">		
+
+		<div class="sign-in-page">
+			<div class="signin-popup">
+				<div class="signin-pop">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="cmp-info">
+								<div class="cm-logo">
+									{# <img src="{{ asset('images/cm-logo.png') }}" alt=""> #}
+									<p>Workwise,  is a global freelancing platform and social networking where businesses and independent professionals connect and collaborate remotely</p>
+								</div><!--cm-logo end-->	
+								<img src="{{ asset('images/cm-main-img.png') }}" alt="">			
+							</div><!--cmp-info end-->
+						</div>
+						<div class="col-lg-6">
+							<div class="login-sec">
+								<ul class="sign-control">
+									<li data-tab="tab-1" class="current"><a href="#" title="">Sign in</a></li>				
+									<li data-tab="tab-2"><a href="#" title="">Sign up</a></li>				
+								</ul>			
+								<div class="sign_in_sec current" id="tab-1">
+									
+									<h3>Sign in</h3>
+									{# <form>
+										<div class="row">
+											<div class="col-lg-12 no-pdd">
+												<div class="sn-field">
+													<input type="text" name="username" placeholder="Username">
+													<i class="la la-user"></i>
+												</div><!--sn-field end-->
+											</div>
+											<div class="col-lg-12 no-pdd">
+												<div class="sn-field">
+													<input type="password" name="password" placeholder="Password">
+													<i class="la la-lock"></i>
+												</div>
+											</div>
+											<div class="col-lg-12 no-pdd">
+												<div class="checky-sec">
+													<div class="fgt-sec">
+														<input type="checkbox" name="cc" id="c1">
+														<label for="c1">
+															<span></span>
+														</label>
+														<small>Remember me</small>
+													</div><!--fgt-sec end-->
+													<a href="#" title="">Forgot Password?</a>
+												</div>
+											</div>
+											<div class="col-lg-12 no-pdd">
+												<button type="submit" value="submit">Sign in</button>
+											</div>
+										</div>
+									</form> #}
+
+                                    <form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+    <label for="inputEmail">Email</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <label for="inputPassword">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    <button class="btn btn-lg btn-primary" type="submit">
+        Sign in
+    </button>
+</form>
+									
+								</div><!--sign_in_sec end-->
+								<div class="sign_in_sec" id="tab-2">
+									
+									<div class="dff-tab current" id="tab-3">
+										
+
+										{% include "registration/register.html.twig"%}
+									</div><!--dff-tab end-->
+									
+								</div>		
+							</div><!--login-sec end-->
+						</div>
+					</div>		
+				</div><!--signin-pop end-->
+			</div><!--signin-popup end-->
+			<div class="footy-sec">
+				<div class="container">
+					<ul>
+						<li><a href="help-center.html" title="">Help Center</a></li>
+						<li><a href="about.html" title="">About</a></li>
+						<li><a href="#" title="">Privacy Policy</a></li>
+						<li><a href="#" title="">Community Guidelines</a></li>
+						<li><a href="#" title="">Cookies Policy</a></li>
+						<li><a href="#" title="">Career</a></li>
+						<li><a href="forum.html" title="">Forum</a></li>
+						<li><a href="#" title="">Language</a></li>
+						<li><a href="#" title="">Copyright Policy</a></li>
+					</ul>
+					<p><img src="images/copy-icon.png" alt="">Copyright 2019</p>
+				</div>
+			</div><!--footy-sec end-->
+		</div><!--sign-in-page end-->
+
+
+	</div><!--theme-layout end-->
+
+
+{% endblock %}
+

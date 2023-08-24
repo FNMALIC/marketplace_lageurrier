@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Store index
+{% endblock %}
+
+{% block body %}
+  {% include 'components/_header.html.twig' %}
+
+  <section class="companies-info">
+    <div class="container">
+      <div class="company-title">
+        <h3>My Store</h3>
+        <a href="{{ path('app_store_new') }}">Create new</a>
+      </div>
+      <!-- company-title end -->
+      <div class="companies-list">
+        <div class="row">
+          {% for store in stores %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="company_profile_info">
+                <div class="company-up-info">
+                  <img src="images/resources/cmp-icon.png" alt="" />
+                  <h3>{{ store.name }}</h3>
+                  <h4>{{ store.description }}</h4>
+                  <ul>
+                    <li>
+                      <a href="{{ path('app_store_edit', { id: store.id }) }}" title="" class="follow">Edit</a>
+                    </li>
+                    <li>
+                      <a href="#" title="" class="message-us"><i class="fa fa-envelope"></i></a>
+                    </li>
+                  </ul>
+                </div>
+                <a href="{{ path('app_store_show', { id: store.id }) }}" title="" class="view-more-pro">View Store</a>
+              </div>
+              <!-- company_profile_info end -->
+            </div>
+          {% else %}
+            <tr>
+              <td colspan="4">no records found</td>
+            </tr>
+          {% endfor %}
+        </div>
+      </div>
+      <!-- companies-list end -->
+    </div>
+  </section>
+{% endblock %}
