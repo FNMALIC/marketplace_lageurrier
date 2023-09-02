@@ -17,6 +17,6 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 
-.env
-.env
+# .env
+# .env
 # composer.lock

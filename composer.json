@@ -14,7 +14,6 @@
         "doctrine/orm": "^2.15",
         "easycorp/easyadmin-bundle": "^4.7",
         "mercuryseries/flashy-bundle": "^5.1",
-        "sensio/framework-extra-bundle": "^6.2",
         "stof/doctrine-extensions-bundle": "^1.8",
         "stripe/stripe-php": "*",
         "symfony/asset": "6.3.*",
