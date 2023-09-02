@@ -19,4 +19,4 @@ yarn-error.log
 
 .env
 .env
-composer.lock
+# composer.lock

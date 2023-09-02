@@ -46,7 +46,6 @@ class CartController extends AbstractController
             // Assuming $cartTotal is the total amount in the cart
             // $session->set('cart_total', $cartTotal);
 
-
                         // Check if the cart is empty
             if ($cart->getItems()->isEmpty()) {
                 // If the cart is empty, set the cart total to zero
@@ -62,6 +61,7 @@ class CartController extends AbstractController
             $this->twig->addGlobal('cart_items', $cart->getItems());
             // $this->container->get('twig')->addGlobal('cart_items', $cart->getItems());
 
+// dd(0);
 
             return $this->render('cart/index.html.twig', [
                 'cart' => $cart,

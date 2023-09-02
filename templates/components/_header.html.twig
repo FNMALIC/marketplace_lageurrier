@@ -15,14 +15,14 @@
 					<nav>
 						<ul>
 							<li>
-								<a href="index.html" title="">
+								<a href="/" title="">
 									<span><img src="{{ asset('images/icon1.png') }}" alt=""></span>
 									Home
 								</a>
 							</li>
 						{% if 'ROLE_SELLER' in app.user.roles  %}
 							<li>
-								<a href="{{ path('app_store_index') }}	" title="">
+								<a href="{{ path('app_store_index') }}" title="">
 									<span><img src="{{ asset('images/icon2.png') }}" alt=""></span>
 								 	my store
 								</a>
@@ -190,7 +190,7 @@
 							</ul>
 							<h3>Setting</h3>
 							<ul class="us-links">
-								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+								<li><a href="{{ path('profile_setting') }}" title="">Account Setting</a></li>
 								<li><a href="#" title="">Privacy</a></li>
 								<li><a href="#" title="">Faqs</a></li>
 								<li><a href="#" title="">Terms & Conditions</a></li>
