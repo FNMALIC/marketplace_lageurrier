@@ -11,7 +11,7 @@ class AppExtension extends AbstractExtension
     {
         return array(
             new TwigFilter('getRoles', array($this, 'getRolesFilter')),
-        );
+        ); 
     }
 
     public function getRolesFilter($user)
