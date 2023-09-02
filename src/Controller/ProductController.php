@@ -10,14 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-// use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Security\Core\Annotation\IsGranted;
 use App\Manager\CartManager;
-// use App\Repository\UserRepository;
-// use Symfony\Component\HttpFoundation\Request;
-// use Symfony\Component\HttpFoundation\Response;
-// use Symfony\Component\Routing\Annotation\Route;
-
 use App\Form\AddToCartType;
 use App\Repository\StoreRepository;
 
@@ -39,9 +33,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    /**
-     * @IsGranted("ROLE_SELLER")
-    */
+    #[IsGranted("ROLE_SELLER")]
     #[Route('/new', name: 'app_product_new', methods: ['GET', 'POST'])]
     public function new(Request $request,StoreRepository $storeRepository ,EntityManagerInterface $entityManager): Response
     {
@@ -111,9 +103,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    /**
-     * @IsGranted("ROLE_SELLER")
-    */
+    #[IsGranted("ROLE_SELLER")]
     #[Route('/{id}/edit', name: 'app_product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
