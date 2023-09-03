@@ -15,6 +15,9 @@ services:
     App\Form\EventListener\FormSubmitListener:
         tags:
             - { name: kernel.event_listener, event: form.submit }
+    App\Form\EventListener\RemoveCartItemListener:
+        tags:
+            - { name: kernel.event_listener, event: form.submit }
     App\AppBundle\Twig\AppExtension:
         tags:
             - { name: twig.extension }

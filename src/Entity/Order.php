@@ -191,6 +191,15 @@ class Order
 
     public function removeItem(OrderItem $item): self
     {
+       // Check if the item is already in the collection
+            if (!$this->items->contains($item)) {
+                return $this;
+            }
+ 
+
+            // Remove the item from the collection
+            $this->items->removeElement($item);
+// dd(!$this->items->contains($item));
         if ($this->items->removeElement($item)) {
             // set the owning side to null (unless already changed)
             if ($item->getOrderRef() === $this) {

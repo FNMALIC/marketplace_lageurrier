@@ -29,10 +29,10 @@ class CartType extends AbstractType
                 'entry_type' => CartItemType::class
             ])
             ->add('save', SubmitType::class)
-            ->add('clear', SubmitType::class)
-            ->addEventSubscriber(new RemoveCartItemListener());
+            ->add('clear', SubmitType::class);
+            // ->addEventSubscriber(new RemoveCartItemListener());
             // dd(new RemoveCartItemListener());
-            // $builder->addEventSubscriber(new RemoveCartItemListener());
+            $builder->addEventSubscriber(new RemoveCartItemListener());
     }
 
     public function configureOptions(OptionsResolver $resolver): void

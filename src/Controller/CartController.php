@@ -37,10 +37,11 @@ class CartController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+                // dd($cart);
                 $cart->setUpdatedAt(new \DateTime());
                 $cartManager->save($cart);
 
-                return $this->redirectToRoute('cart');
+                return $this->redirectToRoute('app_cart');
             }
             // $cartTotal = $cart->getTotal();
             // Assuming $cartTotal is the total amount in the cart
@@ -58,11 +59,11 @@ class CartController extends AbstractController
             // dd(count($cart->getItems()));
             // $twig = new Environment($loader);
             // $twig->addGlobal('myStuff', $someVariable);
-            $this->twig->addGlobal('cart_items', $cart->getItems());
+            // $this->twig->addGlobal('cart_items', $cart->getItems());
             // $this->container->get('twig')->addGlobal('cart_items', $cart->getItems());
 
 // dd(0);
-
+// dd($cart);
             return $this->render('cart/index.html.twig', [
                 'cart' => $cart,
                 'form' => $form->createView()

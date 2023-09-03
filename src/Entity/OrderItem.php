@@ -26,9 +26,10 @@ class OrderItem
 
     #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: "items")]
     #[ORM\JoinColumn(nullable: false)]
-    private Order $orderRef;
+    private  $orderRef;
 
-    public function getId(): ?int
+
+    public function getId(): ?int 
     {
         return $this->id;
     }
