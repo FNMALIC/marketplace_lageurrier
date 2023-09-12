@@ -53,6 +53,7 @@ class Order
 
     public function __construct()
     {
+        $this->totalPrice=null;
         $this->product = new ArrayCollection();
         $this->payments = new ArrayCollection();
         $this->items = new ArrayCollection();

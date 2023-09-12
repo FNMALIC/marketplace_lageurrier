@@ -62,6 +62,8 @@ class CartManager
         }
         if (!$cart) {
             $cart = $this->cartFactory->create();
+            // dd(0);
+            
             $this->cartSessionStorage->setCart($cart);
             // dd($this->requestStack->getSession()->get(self::CART_KEY_NAME));   // This will save the new Cart id in session
         }

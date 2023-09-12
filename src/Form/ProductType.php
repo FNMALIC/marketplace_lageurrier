@@ -18,6 +18,11 @@ class ProductType extends AbstractType
             ->add('description')
             ->add('price')
             ->add('quantity')
+            ->add('imageFilename', FileType::class, [
+                'label' => 'Image',
+                'mapped' => false,
+                'required' => false,
+            ])
             ->add('category')
             ->add('store',HiddenType::class)
             // ->add('orders')

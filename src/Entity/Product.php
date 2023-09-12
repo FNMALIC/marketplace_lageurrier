@@ -44,6 +44,9 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?User $user = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $imageFilename = null;
+
     public function __toString(): string
     {
         return (string)$this->title; 
@@ -197,6 +200,18 @@ class Product
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getImageFilename(): ?string
+    {
+        return $this->imageFilename;
+    }
+
+    public function setImageFilename(string $imageFilename): static
+    {
+        $this->imageFilename = $imageFilename;
 
         return $this;
     }

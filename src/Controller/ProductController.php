@@ -35,17 +35,27 @@ class ProductController extends AbstractController
 
     #[IsGranted("ROLE_SELLER")]
     #[Route('/new', name: 'app_product_new', methods: ['GET', 'POST'])]
-    public function new(Request $request,StoreRepository $storeRepository ,EntityManagerInterface $entityManager): Response
+    public function new(Request $request, StoreRepository $storeRepository, EntityManagerInterface $entityManager): Response
     {
         // dd($_GET['id']);
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
-        
+
         $route = $request->headers->get('referer');
         if ($form->isSubmitted() && $form->isValid()) {
-            $storeId = $storeRepository->findBy(array('id' => $_GET['id'] ));
+            $storeId = $storeRepository->findBy(array('id' => $_GET['id']));
+            $imageFile = $form['imageFilename']->getData();
             // dd($storeId[0]);
+            if ($imageFile) {
+                    $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                    $newFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                    $product->setImageFilename($newFilename);
+                }
             $data = $form->getData();
             //  = "hello";
             $product->setStore($storeId[0]);
@@ -56,7 +66,7 @@ class ProductController extends AbstractController
             $entityManager->flush();
 
             // return $this->redirectToRoute('app_store_index', [], Response::HTTP_SEE_OTHER);
-        
+
             return $this->redirect($route);
         }
 
@@ -67,34 +77,33 @@ class ProductController extends AbstractController
     }
 
 
-    #[Route('/{id}', name: 'app_product_show', methods: ['GET','POST'])]
-    public function show(Product $product,Request $request, CartManager $cartManager): Response
+    #[Route('/{id}', name: 'app_product_show', methods: ['GET', 'POST'])]
+    public function show(Product $product, Request $request, CartManager $cartManager): Response
     {
         // dd(0);
         $form = $this->createForm(AddToCartType::class);
 
         $form->handleRequest($request);
-        
+
         // dd($form->isValid());
 
         if ($form->isSubmitted()) {
-            if ($form->isValid()){
-            $item = $form->getData();
-            
-            $item->setProduct($product);
+            if ($form->isValid()) {
+                $item = $form->getData();
 
-            $cart = $cartManager->getCurrentCart();
-            $cart
-                ->addItem($item)
-                ->setUpdatedAt(new \DateTime());
-            
-            // dd(0);
+                $item->setProduct($product);
 
-            $cartManager->save($cart);    
+                $cart = $cartManager->getCurrentCart();
+                $cart
+                    ->addItem($item)
+                    ->setUpdatedAt(new \DateTime());
 
-            return $this->redirectToRoute('app_product_index', ['id' => $product->getId()]);
+                // dd(0);
+
+                $cartManager->save($cart);
+
+                return $this->redirectToRoute('app_product_index', ['id' => $product->getId()]);
             }
-            
         }
 
         return $this->render('product/show.html.twig', [
@@ -125,7 +134,7 @@ class ProductController extends AbstractController
     #[Route('/{id}', name: 'app_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->request->get('_token'))) {
             $entityManager->remove($product);
             $entityManager->flush();
         }

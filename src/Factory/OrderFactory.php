@@ -37,13 +37,15 @@ class OrderFactory
         $order = new Order();
         $order
             ->setStatus(Order::STATUS_CART)
+            ->setTotalPrice(0)
             ->setCreatedAt(new \DateTime())
             ->setUpdatedAt(new \DateTime());
+
+        // dd($order);
 
         $this->entityManager->persist($order);
         $this->entityManager->flush();
 
-        // dd($order);
         return $order;
 
     }

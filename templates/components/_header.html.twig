@@ -39,8 +39,8 @@
 							<li>
 								<a href="{{ path('app_cart') }}" title="">
 									<span><img src="{{ asset('images/icon2.png') }}" alt=""></span>
-									Cart
-									<p> {{ cart_items }}</p>
+									<span class="badge badge-light"> Cart {{ cart_items }}</span>
+									
 								</a>
 							</li>
 							
@@ -50,7 +50,7 @@
 									Profiles
 								</a>
 								<ul>
-									<li><a href="user-profile.html" title="">User Profile</a></li>
+									<li><a  href="{{ path('app_user_profile') }}" title="">User Profile</a></li>
 									<li><a href="my-profile-feed.html" title="">my-profile-feed</a></li>
 								</ul>
 							</li>
