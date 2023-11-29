@@ -7,7 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+        
 
 class ProductType extends AbstractType
 {
@@ -25,21 +26,8 @@ class ProductType extends AbstractType
             ])
             ->add('category')
             ->add('store',HiddenType::class)
-            // ->add('orders')
+       
         ;
-        // $builder->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event) {
-        //     $data = $event->getData();
-        //     $form = $event->getForm();
-
-        //     dd($data);
-        
-        //     if (isset($data['field1'])) {
-        //         $field2 = $this->container->get('repository')->find($data['field1'])->getValue();
-        
-        //         $data['field2'] = $field2;              
-        //         $event->setData($data); 
-        //     }
-        // });
         
     }
 

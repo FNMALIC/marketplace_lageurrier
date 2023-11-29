@@ -15,7 +15,9 @@
               <div class="right-sidebar">
                 <div class="widget p-2 widget-about">
                   {% if product.imageFilename %}
-                      <img src="{{ asset('images/'~product.imageFilename) }}" alt="{{ product.name }}">
+                      <img src="{{ asset('images/products/'~product.imageFilename) }}" 
+       alt="{{ product.title }}"
+                      >
                   {% else %}
                       <img src="{{ asset('https://www.arma.org/global_graphics/default-store-350x350.jpg') }}" alt="Default Image">
                   {% endif %}

@@ -36,11 +36,12 @@ class ProductCrudController extends AbstractCrudController
             // IdField::new('id')
                 // ->setDisabled(),
             TextField::new('title'),
+            // TextField::new('price'),
             TextField::new('user', 'User')
                 ->formatValue(function ($value, $entity) {
                    
                     // Customize how the user is displayed (e.g., show the username)
-                    return $entity->getUser();
+                    return $entity->getUser()->getEmail();
                 }),
         ];
     }

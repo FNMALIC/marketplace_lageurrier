@@ -18,7 +18,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6">
               <div class="company_profile_info">
                 {% if product.imageFilename %}
-       <img src="{{ asset('images/'~product.imageFilename) }}" alt="{{ product.name }}">
+                {# {{ product.imageFilename }} #}
+       <img src="{{ asset('images/products/'~product.imageFilename) }}" 
+       alt="{{ product.title }}"
+       >
    {% else %}
        <img src="{{ asset('https://www.arma.org/global_graphics/default-store-350x350.jpg') }}" alt="Default Image">
    {% endif %}

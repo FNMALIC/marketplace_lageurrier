@@ -13,7 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Annotation\IsGranted;
 use App\Manager\CartManager;
 use App\Form\AddToCartType;
+use App\Model\ProductSearchData;
+use App\Model\ProductSearchDate;
 use App\Repository\StoreRepository;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Route('/product')]
 class ProductController extends AbstractController
@@ -22,7 +25,10 @@ class ProductController extends AbstractController
     public function index(ProductRepository $productRepository): Response
     {
         $user = $this->getUser(); // Get the currently logged in user
+        // $productSearchData = new ProductSearchData();
 
+        // form  =  $this->createForm(ProductSearchData)
+        
         if (!$user) {
             // If there is no logged in user, redirect to the login page
             return $this->redirectToRoute('login');
@@ -35,45 +41,41 @@ class ProductController extends AbstractController
 
     #[IsGranted("ROLE_SELLER")]
     #[Route('/new', name: 'app_product_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, StoreRepository $storeRepository, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, StoreRepository $storeRepository,UserInterface $user, EntityManagerInterface $entityManager): Response
     {
-        // dd($_GET['id']);
-        $product = new Product();
-        $form = $this->createForm(ProductType::class, $product);
-        $form->handleRequest($request);
-
-        $route = $request->headers->get('referer');
-        if ($form->isSubmitted() && $form->isValid()) {
-            $storeId = $storeRepository->findBy(array('id' => $_GET['id']));
-            $imageFile = $form['imageFilename']->getData();
-            // dd($storeId[0]);
-            if ($imageFile) {
-                    $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                    $newFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
-                    $imageFile->move(
-                        $this->getParameter('images_directory'),
-                        $newFilename
-                    );
-                    $product->setImageFilename($newFilename);
-                }
-            $data = $form->getData();
-            //  = "hello";
-            $product->setStore($storeId[0]);
-            // $request->request->all()['product']['store'] = $_GET['id'];
-            // dd($data,$request->request->all()['product']['store'],$form,$product);
-            // dd($request->request->all(),$form);
-            $entityManager->persist($product);
-            $entityManager->flush();
-
-            // return $this->redirectToRoute('app_store_index', [], Response::HTTP_SEE_OTHER);
-
-            return $this->redirect($route);
-        }
-
-        return $this->render('product/new.html.twig', [
-            'product' => $product,
-            'form' => $form,
-        ]);
+       $product = new Product();
+       
+       $form = $this->createForm(ProductType::class, $product);
+    
+       $form->handleRequest($request);
+    
+       $route = $request->headers->get('referer');
+       if ($form->isSubmitted() && $form->isValid()) {
+           $storeId = $storeRepository->findBy(array('id' => $_GET['id']));
+           $imageFile = $form['imageFilename']->getData();
+           if ($imageFile) {
+               $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+               $newFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+               $imageFile->move(
+                   $this->getParameter('kernel.project_dir') . '/public' . $this->getParameter('images_directory'),
+                   $newFilename
+               );
+               $product->setImageFilename($newFilename);
+           }
+           $data = $form->getData();
+    
+           $product->setStore($storeId[0]);
+           $product->setUser($user);
+           $entityManager->persist($product);
+           $entityManager->flush();
+    
+           return $this->redirect($route);
+       }
+    
+       return $this->render('product/new.html.twig', [
+           'product' => $product,
+           'form' => $form,
+       ]);
     }
 
 
